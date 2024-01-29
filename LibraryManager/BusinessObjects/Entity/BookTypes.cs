@@ -9,5 +9,6 @@ public enum BookTypes
     Roman,
     Biographie,
     Histoire,
-    BD
+    BD,
+    Fantasy
 }

@@ -1,6 +1,7 @@
 ﻿using BusinessObjects.Entity;
 using DataAccessLayer.Repository;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,6 +36,30 @@ namespace BusinessLayer.Catalog
 
         public Book FindBook(int id) {
             return _bookRepository.Get(id);
+        }
+
+        public IEnumerable<Book> GetFantasy()
+        {
+
+            IEnumerable<Book> books = _bookRepository.GetAll();
+
+            IEnumerable<Book> query = (from book in books
+                                        where book.Type == BookTypes.Fantasy
+                                        select book);
+
+            return query;
+        }
+
+        public Book GetBestRate()
+        {
+
+            IEnumerable<Book> books = _bookRepository.GetAll();
+
+            Book query = (from book in books
+                           orderby book.Rate descending
+                           select book).FirstOrDefault(books.First());
+
+            return query;
         }
 
     }
