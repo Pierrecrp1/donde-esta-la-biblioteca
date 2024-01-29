@@ -11,7 +11,7 @@ namespace BusinessObjects.Entity
         public int Id { get; set; }
         public string? Name { get; set; }
         public int Pages { get; set; }
-        public string? Type { get; set; }
+        public BookTypes Type { get; set; }
         public int Rate { get; set; }
         public int AuthorId { get; set; }
         public virtual Author? Author { get; set; }

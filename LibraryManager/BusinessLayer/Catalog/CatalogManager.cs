@@ -23,7 +23,14 @@ namespace BusinessLayer.Catalog
 
         public IEnumerable<Book> DisplayCatalog(string type)
         {
-            return _bookRepository.GetAll().Where(book => book.Type != null && book.Type.Equals(type, StringComparison.OrdinalIgnoreCase));
+            if (Enum.TryParse<BookTypes>(type, true, out BookTypes typeEnum))
+            {
+                return _bookRepository.GetAll().Where(book => book.Type == typeEnum);
+            }
+            else
+            {
+                return Enumerable.Empty<Book>();
+            }
         }
 
         public Book FindBook(int id) {
