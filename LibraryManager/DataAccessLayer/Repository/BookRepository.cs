@@ -7,7 +7,7 @@ using BusinessObjects.Entity;
 
 namespace DataAccessLayer.Repository
 {
-    public class BookRepository
+    public class BookRepository : IGenericRepository<Book>
     {
         private List<Book> BookList = new List<Book>();
         public IEnumerable<Book> GetAll() {

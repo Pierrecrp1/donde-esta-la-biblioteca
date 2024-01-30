@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Services.Services
 {
-    public class CatalogService
+    public class CatalogService : ICatalogService
     {
         private readonly CatalogManager _catalogManager;
 

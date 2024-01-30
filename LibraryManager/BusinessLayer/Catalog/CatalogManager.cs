@@ -9,16 +9,17 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Catalog
 {
-    public class CatalogManager
+    public class CatalogManager : ICatalogManager
     {
-        private readonly BookRepository _bookRepository;
+        private readonly IGenericRepository<Book> _bookRepository;
 
-        public CatalogManager(BookRepository bookRepository)
+        public CatalogManager(IGenericRepository<Book> genericRepository)
         {
-            _bookRepository = bookRepository;
+            _bookRepository = genericRepository;
         }
 
-        public IEnumerable<Book> DisplayCatalog() {
+        public IEnumerable<Book> DisplayCatalog()
+        {
             return _bookRepository.GetAll();
         }
 
@@ -34,7 +35,8 @@ namespace BusinessLayer.Catalog
             }
         }
 
-        public Book FindBook(int id) {
+        public Book FindBook(int id)
+        {
             return _bookRepository.Get(id);
         }
 
@@ -44,8 +46,8 @@ namespace BusinessLayer.Catalog
             IEnumerable<Book> books = _bookRepository.GetAll();
 
             IEnumerable<Book> query = (from book in books
-                                        where book.Type == BookTypes.Fantasy
-                                        select book);
+                                       where book.Type == BookTypes.Fantasy
+                                       select book);
 
             return query;
         }
@@ -56,8 +58,8 @@ namespace BusinessLayer.Catalog
             IEnumerable<Book> books = _bookRepository.GetAll();
 
             Book query = (from book in books
-                           orderby book.Rate descending
-                           select book).FirstOrDefault(books.First());
+                          orderby book.Rate descending
+                          select book).FirstOrDefault(books.First());
 
             return query;
         }
